@@ -1,29 +1,35 @@
-"use client"
+"use client";
 
-import { useSelector, useDispatch } from "react-redux"
-import type { RootState } from "@/lib/store"
-import { removeFromCart, updateQuantity, clearCart } from "@/lib/slices/cartSlice"
-import { CartItem } from "./CartItem"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ShoppingBag, Trash2 } from "lucide-react"
-import Link from "next/link"
+import { useSelector, useDispatch } from "react-redux";
+import type { RootState } from "@/lib/store";
+import {
+  removeFromCart,
+  updateQuantity,
+  clearCart,
+} from "@/lib/slices/cartSlice";
+import { CartItem } from "./CartItem";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ShoppingBag, Trash2 } from "lucide-react";
+import Link from "next/link";
 
 export function CartPage() {
-  const dispatch = useDispatch()
-  const { items, total } = useSelector((state: RootState) => state.cart)
+  const dispatch = useDispatch();
+  const { items, total } = useSelector((state: RootState) => state.cart);
 
   if (items.length === 0) {
     return (
       <div className="text-center py-12">
         <ShoppingBag className="h-24 w-24 text-muted-foreground mx-auto mb-4" />
         <h2 className="text-2xl font-semibold mb-2">Your cart is empty</h2>
-        <p className="text-muted-foreground mb-8">Start shopping to add items to your cart</p>
+        <p className="text-muted-foreground mb-8">
+          Start shopping to add items to your cart
+        </p>
         <Link href="/">
           <Button size="lg">Continue Shopping</Button>
         </Link>
       </div>
-    )
+    );
   }
 
   return (
@@ -46,7 +52,9 @@ export function CartPage() {
             <CartItem
               key={item.id}
               item={item}
-              onUpdateQuantity={(quantity) => dispatch(updateQuantity({ id: item.id, quantity }))}
+              onUpdateQuantity={(quantity) =>
+                dispatch(updateQuantity({ id: item.id, quantity }))
+              }
               onRemove={() => dispatch(removeFromCart(item.id))}
             />
           ))}
@@ -85,5 +93,5 @@ export function CartPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

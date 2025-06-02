@@ -15,6 +15,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Star, ShoppingCart, Heart } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/lib/auth";
+import { cn } from "@/lib/utils";
 
 interface ProductCardProps {
   product: Product;
@@ -66,11 +67,11 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Card className="group hover:shadow-lg dark:hover:shadow-xl transition-all duration-300 border-border hover:border-primary/20 bg-card">
+    <Card className="group hover:shadow-lg dark:hover:shadow-xl transition-all duration-300 border-border-color hover:border-primary/50 bg-card">
       <CardContent className="p-4">
         <div className="relative">
           <Link href={`/products/${product.id}`}>
-            <div className="aspect-square relative mb-4 overflow-hidden rounded-lg bg-gray-50 dark:bg-gray-800/50 group-hover:bg-gray-100 dark:group-hover:bg-gray-800/70 transition-colors">
+            <div className="aspect-square relative mb-4 overflow-hidden rounded-lg bg-background group-hover:bg-muted/50 transition-colors">
               <Image
                 src={product.image || "/placeholder.svg"}
                 alt={product.title}
@@ -84,22 +85,22 @@ export function ProductCard({ product }: ProductCardProps) {
           {/* Wishlist button */}
           <button
             onClick={handleToggleFavorite}
-            className={`absolute top-2 right-2 p-2 rounded-full backdrop-blur-sm transition-all duration-200 shadow-sm ${
+            className={cn(
+              "absolute top-2 right-2 p-2 rounded-full backdrop-blur-sm transition-all duration-200 shadow-sm",
               isAuthenticated
-                ? "bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800"
-                : "bg-gray-200/80 dark:bg-gray-700/80 cursor-not-allowed"
-            }`}
+                ? "bg-background/80 hover:bg-background text-foreground"
+                : "bg-muted/80 text-muted-foreground cursor-not-allowed"
+            )}
             disabled={!isAuthenticated}
             title={
               isAuthenticated ? "Add to favorites" : "Sign in to add favorites"
             }
           >
             <Heart
-              className={`h-4 w-4 transition-colors ${
-                isLiked
-                  ? "text-red-500 fill-current"
-                  : "text-gray-600 dark:text-gray-400"
-              }`}
+              className={cn(
+                "h-4 w-4 transition-colors",
+                isLiked ? "text-red-500 fill-current" : "text-muted-foreground"
+              )}
             />
           </button>
         </div>
@@ -135,7 +136,7 @@ export function ProductCard({ product }: ProductCardProps) {
                     className={`h-3 w-3 ${
                       i < Math.floor(product.rating.rate)
                         ? "text-yellow-400 fill-current"
-                        : "text-gray-300 dark:text-gray-600"
+                        : "text-muted-foreground"
                     }`}
                   />
                 ))}
@@ -149,7 +150,12 @@ export function ProductCard({ product }: ProductCardProps) {
       </CardContent>
 
       <CardFooter className="p-4 pt-0">
-        <Button onClick={handleAddToCart} className="w-full group" size="sm">
+        <Button
+          onClick={handleAddToCart}
+          className="w-full group"
+          size="sm"
+          variant="secondary"
+        >
           <ShoppingCart className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
           Add to Cart
         </Button>

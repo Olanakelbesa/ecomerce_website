@@ -82,11 +82,11 @@ export function FilterProducts() {
   };
 
   return (
-    <Card className="mb-8 border-border">
+    <Card className="mb-8 border-border-color bg-card">
       <CardContent className="p-6">
         {/* Categories Section */}
         <div className="mb-6">
-          <h4 className="text-sm font-medium mb-3 text-muted-foreground">
+          <h4 className="text-sm font-medium mb-3 text-foreground">
             Categories
           </h4>
           <div className="flex flex-wrap gap-2">
@@ -109,9 +109,7 @@ export function FilterProducts() {
 
         {/* Sort Section */}
         <div>
-          <h4 className="text-sm font-medium mb-3 text-muted-foreground">
-            Sort By
-          </h4>
+          <h4 className="text-sm font-medium mb-3 text-foreground">Sort By</h4>
           <div className="flex flex-wrap gap-2">
             {sortOptions.map((option) => {
               const isActive = getCurrentSortValue(option.value);

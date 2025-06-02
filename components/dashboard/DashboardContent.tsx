@@ -14,7 +14,7 @@ export function DashboardContent() {
       <div className="container mx-auto px-4 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-4">
+          <h1 className="text-3xl font-bold mb-4 text-foreground">
             Welcome back, {user?.name || user?.username}!
           </h1>
           <p className="text-muted-foreground">

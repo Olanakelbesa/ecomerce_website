@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function LandingCTA() {
   return (
-    <section className="py-20 bg-[#2A6DB4] text-white relative overflow-hidden">
+    <section className="py-20 bg-secondary text-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]" />
 
