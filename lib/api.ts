@@ -43,7 +43,7 @@ export const getProduct = async (id: number): Promise<Product> => {
       if (error.response?.status === 404) {
         throw new Error("Product not found")
       }
-      if (error.response?.status >= 500) {
+      if (error.response?.status && error.response.status >= 500) {
         throw new Error("Server error")
       }
     }
