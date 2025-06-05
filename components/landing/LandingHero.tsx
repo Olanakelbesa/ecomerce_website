@@ -6,14 +6,8 @@ import Image from "next/image";
 
 export function LandingHero() {
   return (
-    <section className="relative overflow-hidden bg-background py-16 lg:py-24">
-      {/* Background decorative elements */}
-      <div className="absolute top-20 right-20 text-8xl font-bold text-muted opacity-50">
-        05
-      </div>
-      <div className="absolute bottom-20 right-32 text-6xl font-bold text-muted opacity-50">
-        01
-      </div>
+    <section className="relative overflow-hidden bg-background py-10">
+      
 
       <div className="container mx-auto px-4 relative">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[600px]">
@@ -22,28 +16,25 @@ export function LandingHero() {
             <div className="space-y-6">
               {/* Trending Badge */}
               <Badge
-                variant="secondary"
-                className="bg-muted text-muted-foreground text-sm font-medium px-4 py-2"
+                className="bg-muted hover:bg-mute  text-muted-foreground text-sm font-medium px-4 py-2 "
               >
                 <Zap className="h-4 w-4 mr-2 text-yellow-500" />
-                TRENDING COLLECTION
+                New Collection Available
               </Badge>
 
               {/* Main Heading */}
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-foreground">
-                Explore Winter
+               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                <span className="text-primary">
+                  Shop Smart,
+                </span>
                 <br />
-                <span className="text-foreground">Collection</span>
+                <span className="text-foreground">Live Better</span>
               </h1>
 
-              {/* Description */}
-              <div className="max-w-md">
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  We Design Pieces Of Furniture And Object That Perfectly
-                  <br />
-                  Gap Between Functionality And Beauty.
-                </p>
-              </div>
+              <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
+                Discover premium products from top brands worldwide. Quality
+                guaranteed, fast shipping, and exceptional customer service.
+              </p>
             </div>
 
             {/* Action Buttons */}
@@ -61,7 +52,7 @@ export function LandingHero() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 hover:bg-primary border-primary text-foreground px-6 py-4 rounded-full font-medium group"
+                className="border-2 border-primary hover:text-primary px-6 py-4 rounded-full font-medium group"
               >
                 <div className="flex items-center">Learn More</div>
               </Button>
@@ -98,7 +89,7 @@ export function LandingHero() {
                 <div className="text-center">
                   <div className="text-xs text-white font-bold">NEW</div>
                   <div className="text-xs text-white font-bold">
-                    SEASON
+                    BRAND
                   </div>
                 </div>
               </div>
@@ -117,6 +108,15 @@ export function LandingHero() {
       {/* Additional decorative elements */}
       <div className="absolute bottom-8 left-8 opacity-20">
         <div className="w-4 h-4 bg-yellow-400 rounded-full animate-pulse"></div>
+      </div>
+      <div className="absolute top-16 right-20 opacity-20">
+        <div className="w-80 h-80 bg-yellow-300 rounded-full animate-pulse"></div>
+      </div>
+      <div className="absolute -bottom-20 right-1/2 opacity-20">
+        <div className="w-80 h-80 bg-yellow-300 rounded-full animate-pulse"></div>
+      </div>
+      <div className="absolute -bottom-10 right-0 opacity-20">
+        <div className="w-72 h-72 bg-yellow-200 rounded-full animate-pulse"></div>
       </div>
       <div className="absolute top-32 left-16 opacity-20">
         <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse delay-1000"></div>

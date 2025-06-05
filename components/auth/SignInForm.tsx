@@ -77,7 +77,7 @@ export function SignInForm() {
   // Show loading while checking auth status
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
+      <div className="min-h-screen dark:bg-[#111827] flex items-center justify-center p-4">
         <div className="w-full max-w-md text-center">
           <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary" />
           <p className="text-muted-foreground">
@@ -89,19 +89,10 @@ export function SignInForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen dark:bg-black/60 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Back to Landing */}
-        <div className="mb-6">
-          <Link href="/">
-            <Button variant="ghost" className="group">
-              <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-              Back to Home
-            </Button>
-          </Link>
-        </div>
 
-        <Card className="border-border shadow-xl">
+        <Card className="border-border shadow-xl dark:bg-[#111827]">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold text-foreground">
               Welcome Back

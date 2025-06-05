@@ -105,7 +105,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4">
-          <Button onClick={handleAddToCart} size="lg" className="flex-1">
+          <Button onClick={handleAddToCart} size="lg" className="flex-1 bg-secondary hover:bg-primary/90">
             <ShoppingCart className="h-5 w-5 mr-2" />
             Add to Cart
           </Button>

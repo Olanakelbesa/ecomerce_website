@@ -19,12 +19,8 @@ import {
   X,
   ShoppingCart,
   LogOut,
-  Package,
   UserCircle,
   Home,
-  Sparkles,
-  Clock,
-  Shield,
   Heart,
   Search,
 } from "lucide-react";
@@ -57,11 +53,6 @@ export function Header() {
     dispatch(setFilters({ searchQuery: searchInput }));
   };
 
-  const handleClearFilters = () => {
-    setSearchInput("");
-    dispatch(clearFilters());
-  };
-
   const handleSignOut = () => {
     signOut();
     setMobileMenuOpen(false);
@@ -69,7 +60,7 @@ export function Header() {
   };
 
   return (
-    <header className="bg-background/95 backdrop-blur-sm border-b sticky top-0 z-50">
+    <header className="dark:bg-[#111827] backdrop-blur-sm shadow dark:shadow-gray-700 sticky top-0 z-50">
       <div className="mx-auto px-10">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -77,7 +68,10 @@ export function Header() {
             href={isAuthenticated ? "/dashboard" : "/"}
             className="text-2xl font-bold text-foreground hover:text-primary transition-colors flex items-center space-x-2"
           >
-            <span>UrjiStore</span>
+            <p>
+              <span className="text-primary">Urji</span>
+              <span>Store</span>
+            </p>
           </Link>
 
           {/* Desktop Navigation or Search */}
@@ -98,7 +92,7 @@ export function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-foreground/80 hover:text-foreground transition-colors font-medium"
+                  className="text-foreground/80 hover:text-primary transition-colors font-medium"
                 >
                   {item.name}
                 </Link>
@@ -237,7 +231,6 @@ export function Header() {
                 {/* Sign In Button */}
                 <Link href="/auth/signin">
                   <Button className="group">
-                    <User className="h-4 w-4 mr-2" />
                     Sign In
                   </Button>
                 </Link>
