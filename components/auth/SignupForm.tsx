@@ -1,7 +1,7 @@
 "use client";
 
-import type React from "react";
-import { useState, useEffect } from "react";
+import React from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
@@ -9,20 +9,22 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Loader2, ArrowLeft, Eye, EyeOff, CheckCircle } from "lucide-react";
-import Link from "next/link";
+import { Loader2, Eye, EyeOff, CheckCircle } from "lucide-react";
 
-export function SignInForm() {
+export function SignupForm() {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const router = useRouter();
-  const { signIn, isAuthenticated, isLoading: authLoading } = useAuth();
+  const { signUp, isAuthenticated, isLoading: authLoading } = useAuth();
 
   // If user is already authenticated, redirect to dashboard
-  useEffect(() => {
+  React.useEffect(() => {
     if (isAuthenticated) {
       router.push("/dashboard");
     }
@@ -30,25 +32,35 @@ export function SignInForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
+    setSuccess("");
 
-    const result = await signIn(username.trim(), password);
+    if (!username.trim() || !email.trim() || !password || !confirmPassword) {
+      setError("Please fill in all fields.");
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    setLoading(true);
+
+    // signUp should be implemented in your auth context/provider
+    const result = await signUp(username.trim(), email.trim(), password);
 
     if (result.success) {
-      // Show success message briefly before redirect
+      setSuccess("Account created! Redirecting...");
       setTimeout(() => {
         router.push("/dashboard");
-      }, 500);
+      }, 1000);
     } else {
-      setError(result.error || "Sign in failed");
+      setError(result.error || "Sign up failed");
     }
 
     setLoading(false);
   };
 
-
-  // Show loading while checking auth status
   if (authLoading) {
     return (
       <div className="min-h-screen dark:bg-[#111827] flex items-center justify-center p-4">
@@ -63,15 +75,15 @@ export function SignInForm() {
   }
 
   return (
-    <div className="min-h-screen dark:bg-black/60 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-100 dark:bg-black/60 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <Card className="border-border shadow-xl dark:bg-[#111827]">
+        <Card className="border-none shadow-xl dark:bg-[#111827]">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold text-foreground">
-              Welcome Back
+              Create Account
             </CardTitle>
             <p className="text-muted-foreground">
-              Sign in to access your UrjiStore account
+              Sign up for a new UrjiStore account
             </p>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -92,7 +104,22 @@ export function SignInForm() {
                   autoComplete="username"
                 />
               </div>
-
+              <div>
+                <Label htmlFor="email" className="text-foreground">
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+                  disabled={loading}
+                  className="bg-background border-border"
+                  autoComplete="email"
+                />
+              </div>
               <div>
                 <Label htmlFor="password" className="text-foreground">
                   Password
@@ -107,7 +134,7 @@ export function SignInForm() {
                     required
                     disabled={loading}
                     className="bg-background border-border pr-10"
-                    autoComplete="current-password"
+                    autoComplete="new-password"
                   />
                   <Button
                     type="button"
@@ -125,37 +152,52 @@ export function SignInForm() {
                   </Button>
                 </div>
               </div>
-
+              <div>
+                <Label htmlFor="confirmPassword" className="text-foreground">
+                  Confirm Password
+                </Label>
+                <Input
+                  id="confirmPassword"
+                  type={showPassword ? "text" : "password"}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Confirm your password"
+                  required
+                  disabled={loading}
+                  className="bg-background border-border"
+                  autoComplete="new-password"
+                />
+              </div>
               {error && (
                 <Alert variant="destructive">
                   <AlertDescription>{error}</AlertDescription>
                 </Alert>
               )}
-
+              {success && (
+                <Alert variant="default">
+                  <AlertDescription>{success}</AlertDescription>
+                </Alert>
+              )}
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Authenticating...
+                    Creating account...
                   </>
                 ) : (
-                  <>
-                    Sign In
-                  </>
+                  <>Sign Up</>
                 )}
               </Button>
               <div className="text-center mt-4 text-sm text-muted-foreground">
-                Don&apos;t have an account?{" "}
-                <Link
-                  href="/auth/signup"
+                Already have an account?{" "}
+                <a
+                  href="/auth/signin"
                   className="text-primary underline hover:text-primary/80 transition-colors"
                 >
-                  Sign up
-                </Link>
+                  Sign in
+                </a>
               </div>
             </form>
-
-            
           </CardContent>
         </Card>
       </div>

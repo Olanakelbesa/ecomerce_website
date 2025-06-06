@@ -30,7 +30,7 @@ export function ThemeToggle() {
     <Button
       variant="outline"
       size="icon"
-      className="h-9 w-9 border-border hover:bg-accent"
+      className="h-9 w-9 border-border hover:text-primary hover:border-primary"
       onClick={toggleTheme}
       aria-label="Toggle theme"
     >

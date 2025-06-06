@@ -107,7 +107,7 @@ export function LandingHero() {
 
       {/* Additional decorative elements */}
       <div className="absolute bottom-8 left-8 opacity-20">
-        <div className="w-4 h-4 bg-yellow-400 rounded-full animate-pulse"></div>
+        <div className="w-10 h-10 bg-yellow-400 rounded-full animate-pulse"></div>
       </div>
       <div className="absolute top-16 right-20 opacity-20">
         <div className="w-80 h-80 bg-yellow-300 rounded-full animate-pulse"></div>

@@ -50,16 +50,6 @@ export function FilterProducts() {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  const handleClearFilters = () => {
-    dispatch(clearFilters());
-    // Reset sort directions to default
-    setSortDirections({
-      title: true,
-      price: true,
-      "rating.rate": false,
-    });
-  };
-
   const handleSort = (value: string) => {
     const isAscending = !sortDirections[value];
     setSortDirections((prev) => ({ ...prev, [value]: isAscending }));
@@ -93,8 +83,13 @@ export function FilterProducts() {
             {mainCategories.map((category) => (
               <Button
                 key={category}
-                variant={filters.category === category ? "default" : "outline"}
-                className="capitalize"
+                variant={
+                  (category === "all" && !filters.category) ||
+                  (category !== "all" && filters.category === category)
+                    ? "default"
+                    : "outline"
+                }
+                className="capitalize "
                 onClick={() =>
                   dispatch(
                     setFilters({ category: category === "all" ? "" : category })

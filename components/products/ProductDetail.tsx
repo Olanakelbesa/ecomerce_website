@@ -1,31 +1,34 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { useDispatch, useSelector } from "react-redux"
-import { addToCart } from "@/lib/slices/cartSlice"
-import { addToFavorites, removeFromFavorites } from "@/lib/slices/favoritesSlice"
-import type { Product } from "@/lib/types"
-import type { RootState } from "@/lib/store"
-import { Button } from "@/components/ui/button"
-import { Star, ShoppingCart, Heart } from "lucide-react"
-import { useState, useEffect } from "react"
-import { useAuth } from "@/lib/auth"
+import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "@/lib/slices/cartSlice";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "@/lib/slices/favoritesSlice";
+import type { Product } from "@/lib/types";
+import type { RootState } from "@/lib/store";
+import { Button } from "@/components/ui/button";
+import { Star, ShoppingCart, Heart } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useAuth } from "@/lib/auth";
 
 interface ProductDetailProps {
-  product: Product
+  product: Product;
 }
 
 export function ProductDetail({ product }: ProductDetailProps) {
-  const dispatch = useDispatch()
-  const { isAuthenticated } = useAuth()
-  const favorites = useSelector((state: RootState) => state.favorites.items)
-  const [isLiked, setIsLiked] = useState(false)
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useAuth();
+  const favorites = useSelector((state: RootState) => state.favorites.items);
+  const [isLiked, setIsLiked] = useState(false);
 
   // Check if product is in favorites
   useEffect(() => {
-    const isFavorite = favorites.some((item) => item.id === product.id)
-    setIsLiked(isFavorite)
-  }, [favorites, product.id])
+    const isFavorite = favorites.some((item) => item.id === product.id);
+    setIsLiked(isFavorite);
+  }, [favorites, product.id]);
 
   const handleAddToCart = () => {
     dispatch(
@@ -34,18 +37,18 @@ export function ProductDetail({ product }: ProductDetailProps) {
         title: product.title,
         price: product.price,
         image: product.image,
-      }),
-    )
-  }
+      })
+    );
+  };
 
   const handleToggleFavorite = () => {
     if (!isAuthenticated) {
       // Optionally show a message or redirect to login
-      return
+      return;
     }
 
     if (isLiked) {
-      dispatch(removeFromFavorites(product.id))
+      dispatch(removeFromFavorites(product.id));
     } else {
       dispatch(
         addToFavorites({
@@ -55,10 +58,10 @@ export function ProductDetail({ product }: ProductDetailProps) {
           image: product.image,
           category: product.category,
           rating: product.rating,
-        }),
-      )
+        })
+      );
     }
-  }
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -75,7 +78,9 @@ export function ProductDetail({ product }: ProductDetailProps) {
 
       <div className="space-y-6">
         <div>
-          <p className="text-sm text-muted-foreground capitalize mb-2">{product.category}</p>
+          <p className="text-sm text-muted-foreground capitalize mb-2">
+            {product.category}
+          </p>
           <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
 
           <div className="flex items-center space-x-2 mb-4">
@@ -101,28 +106,31 @@ export function ProductDetail({ product }: ProductDetailProps) {
 
         <div>
           <h2 className="text-lg font-semibold mb-2">Description</h2>
-          <p className="text-muted-foreground leading-relaxed">{product.description}</p>
+          <p className="text-muted-foreground leading-relaxed">
+            {product.description}
+          </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Button onClick={handleAddToCart} size="lg" className="flex-1 bg-secondary hover:bg-primary/90">
+        <div className="w-1/2 flex flex-col sm:flex-row gap-4">
+          <Button
+            onClick={handleAddToCart}
+            size="lg"
+            className="flex-1 bg-primary hover:bg-primary/90"
+          >
             <ShoppingCart className="h-5 w-5 mr-2" />
             Add to Cart
           </Button>
 
           <Button
             onClick={handleToggleFavorite}
-            size="lg"
-            variant={isLiked ? "destructive" : "outline"}
-            className={`flex-1 ${!isAuthenticated ? "opacity-50 cursor-not-allowed" : ""}`}
-            disabled={!isAuthenticated}
+            variant={"outline"}
+            className="bg-transparent text-primary"
             title={isAuthenticated ? undefined : "Sign in to add favorites"}
           >
-            <Heart className={`h-5 w-5 mr-2 ${isLiked ? "fill-current" : ""}`} />
-            {isLiked ? "Remove from Favorites" : "Add to Favorites"}
+            <Heart className={`h-5 w-5 ${isLiked ? "fill-primary " : ""}`} />
           </Button>
         </div>
       </div>
     </div>
-  )
+  );
 }

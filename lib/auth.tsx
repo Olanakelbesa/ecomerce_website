@@ -20,13 +20,18 @@ export interface User {
 
 export interface AuthContextType {
   user: User | null;
+  isAuthenticated: boolean;
   isLoading: boolean;
   signIn: (
     username: string,
     password: string
   ) => Promise<{ success: boolean; error?: string }>;
   signOut: () => void;
-  isAuthenticated: boolean;
+  signUp: (
+    username: string,
+    email: string,
+    password: string
+  ) => Promise<{ success: boolean; error?: string }>;
 }
 
 // Demo users database
@@ -163,10 +168,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const value: AuthContextType = {
     user,
+    isAuthenticated: !!user,
     isLoading,
     signIn,
     signOut,
-    isAuthenticated: !!user,
+    signUp: async () => {
+      return { success: false, error: "Sign up is not implemented yet" };
+    },
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

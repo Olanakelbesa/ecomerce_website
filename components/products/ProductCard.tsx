@@ -70,7 +70,7 @@ export function ProductCard({ product }: ProductCardProps) {
     <Card className="group hover:shadow-lg dark:hover:shadow-xl transition-all duration-300 border-border-color hover:border-primary/50 bg-card">
       <CardContent className="p-4">
         <div className="relative">
-          <Link href={`/products/${product.id}`}>
+          <Link href={`/dashboard/products/${product.id}`}>
             <div className="aspect-square relative mb-4 overflow-hidden rounded-lg bg-background group-hover:bg-muted/50 transition-colors">
               <Image
                 src={product.image || "/placeholder.svg"}
@@ -104,49 +104,48 @@ export function ProductCard({ product }: ProductCardProps) {
             />
           </button>
         </div>
-
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <p className="text-sm text-muted-foreground capitalize font-medium bg-muted/50 px-2 py-1 rounded-md">
-              {product.category}
-            </p>
-            <div className="flex items-center space-x-1">
-              <Star className="h-3 w-3 text-yellow-400 fill-current" />
-              <span className="text-xs text-muted-foreground">
-                {product.rating.rate}
-              </span>
+        <Link href={`/dashboard/products/${product.id}`} className="hover:text-primary">
+          <div className="space-y-2 ">
+            <div className="flex items-center justify-between py-2">
+              <p className="text-sm text-muted-foreground capitalize font-medium bg-muted/50 px-2 py-1 rounded-md">
+                {product.category}
+              </p>
+              <div className="flex items-center space-x-1">
+                <Star className="h-3 w-3 text-yellow-400 fill-current" />
+                <span className="text-xs text-muted-foreground">
+                  {product.rating.rate}
+                </span>
+              </div>
             </div>
-          </div>
 
-          <Link href={`/products/${product.id}`}>
-            <h3 className="font-semibold line-clamp-2 hover:text-primary transition-colors text-foreground leading-tight">
+            <h3 className="font-semibold line-clamp-2  transition-colors leading-tight py-1">
               {product.title}
             </h3>
-          </Link>
 
-          <div className="flex items-center justify-between">
-            <p className="text-2xl font-bold text-foreground">
-              ${product.price.toFixed(2)}
-            </p>
-            <div className="flex items-center space-x-1">
-              <div className="flex items-center">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`h-3 w-3 ${
-                      i < Math.floor(product.rating.rate)
-                        ? "text-yellow-400 fill-current"
-                        : "text-muted-foreground"
-                    }`}
-                  />
-                ))}
+            <div className="flex items-center justify-between">
+              <p className="text-2xl font-bold text-foreground">
+                ${product.price.toFixed(2)}
+              </p>
+              <div className="flex items-center space-x-1">
+                <div className="flex items-center">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`h-3 w-3 ${
+                        i < Math.floor(product.rating.rate)
+                          ? "text-yellow-400 fill-current"
+                          : "text-muted-foreground"
+                      }`}
+                    />
+                  ))}
+                </div>
+                <span className="text-xs text-muted-foreground">
+                  ({product.rating.count})
+                </span>
               </div>
-              <span className="text-xs text-muted-foreground">
-                ({product.rating.count})
-              </span>
             </div>
           </div>
-        </div>
+        </Link>
       </CardContent>
 
       <CardFooter className="p-4 pt-0">
@@ -154,7 +153,7 @@ export function ProductCard({ product }: ProductCardProps) {
           onClick={handleAddToCart}
           className="w-full group"
           size="sm"
-          variant="secondary"
+          variant="default"
         >
           <ShoppingCart className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
           Add to Cart

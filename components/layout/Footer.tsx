@@ -1,13 +1,13 @@
 export function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-12 ">
+    <footer className="bg-gray-900 text-gray-300 pt-12 ">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-lg font-semibold mb-4 ">
-              UrjiStore
+              <span className="text-primary">Urji</span>Store
             </h3>
-            <p className="/80">
+            <p className="">
               Your trusted destination for quality products and exceptional
               service.
             </p>
@@ -17,7 +17,7 @@ export function Footer() {
             <h4 className="text-lg font-semibold mb-4 ">
               Quick Links
             </h4>
-            <ul className="space-y-2 /80">
+            <ul className="space-y-2 text-sm  ">
               <li>
                 <a
                   href="/"
@@ -49,7 +49,7 @@ export function Footer() {
             <h4 className="text-lg font-semibold mb-4 ">
               Categories
             </h4>
-            <ul className="space-y-2 /80">
+            <ul className="space-y-2 text-sm  ">
               <li>
                 <a
                   href="#"
@@ -81,7 +81,7 @@ export function Footer() {
             <h4 className="text-lg font-semibold mb-4 ">
               Contact
             </h4>
-            <div className="/80 space-y-2">
+            <div className=" text-sm space-y-2">
               <p>Email: support@UrjiStore.com</p>
               <p>Phone: (555) 123-4567</p>
               <div className="flex space-x-4 mt-4">
@@ -108,10 +108,10 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-border-color mt-8 pt-8 text-center /80">
-          <p>&copy; 2024 UrjiStore. All rights reserved.</p>
-        </div>
       </div>
+        <div className="w-full border-t border-border-color py-4 text-center text-sm mt-4 ">
+          <p>&copy; 2025 UrjiStore. All rights reserved.</p>
+        </div>
     </footer>
   );
 }

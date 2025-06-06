@@ -102,8 +102,6 @@ export function Header() {
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-3">
-            <ThemeToggle />
-
             {isAuthenticated ? (
               // Authenticated User Actions
               <>
@@ -123,19 +121,20 @@ export function Header() {
                 </Link>
 
                 {/* Shopping Cart */}
-                <Link href="/cart" className="relative group">
+                <Link href="/dashboard/cart" className="relative group">
                   <Button variant="ghost" size="sm" className="relative">
                     <ShoppingCart className="h-5 w-5" />
                     {cartItemCount > 0 && (
                       <Badge
                         variant="destructive"
-                        className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs animate-pulse"
+                        className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs"
                       >
                         {cartItemCount}
                       </Badge>
                     )}
                   </Button>
                 </Link>
+                <ThemeToggle />
 
                 {/* User Menu */}
                 <DropdownMenu>
@@ -226,14 +225,20 @@ export function Header() {
                 </DropdownMenu>
               </>
             ) : (
-              // Unauthenticated User Actions
-              <div className="flex items-center space-x-3">
-                {/* Sign In Button */}
-                <Link href="/auth/signin">
-                  <Button className="group">
-                    Sign In
-                  </Button>
-                </Link>
+              <div className="flex gap-3 items-center w-full">
+                <ThemeToggle />
+                <div className="flex items-center space-x-3">
+                  {/* Sign In Button */}
+                  <Link href="/auth/signin">
+                    <Button className="group">Sign In</Button>
+                  </Link>
+                </div>
+                <div className="flex items-center space-x-3">
+                  {/* Sign In Button */}
+                  <Link href="/auth/signup">
+                    <Button variant={"outline"} className="text-primary hover:text-primary/80">Sign Up</Button>
+                  </Link>
+                </div>
               </div>
             )}
 
@@ -286,7 +291,7 @@ export function Header() {
                   </Link>
 
                   <Link
-                    href="/cart"
+                    href="/dashboard/cart"
                     className="flex items-center justify-between text-foreground/80 hover:text-foreground transition-colors font-medium py-2 px-3 rounded-md hover:bg-accent"
                     onClick={() => setMobileMenuOpen(false)}
                   >

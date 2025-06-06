@@ -14,9 +14,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Modern eCommerce Store",
+  title: "Urji Store",
   description:
-    "A modern eCommerce website built with Next.js and Fake Store API",
+    "Urji eCommerce Store",
   keywords: ["ecommerce", "shopping", "products", "online store"],
   authors: [{ name: "UrjiStore Team" }],
   generator: "v0.dev",

@@ -19,7 +19,7 @@ export function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div className="text-center py-12">
+      <div className="text-center  items-center py-12">
         <ShoppingBag className="h-24 w-24 text-muted-foreground mx-auto mb-4" />
         <h2 className="text-2xl font-semibold mb-2">Your cart is empty</h2>
         <p className="text-muted-foreground mb-8">
@@ -80,14 +80,16 @@ export function CartPage() {
                   <span>${total.toFixed(2)}</span>
                 </div>
               </div>
-              <Button className="w-full" size="lg">
-                Proceed to Checkout
-              </Button>
-              <Link href="/">
-                <Button variant="outline" className="w-full">
-                  Continue Shopping
+              <div className="flex flex-col gap-2">
+                <Button className="w-full" size="lg">
+                  Proceed to Checkout
                 </Button>
-              </Link>
+                <Link href="/">
+                  <Button variant="outline" className="w-full">
+                    Continue Shopping
+                  </Button>
+                </Link>
+              </div>
             </CardContent>
           </Card>
         </div>
