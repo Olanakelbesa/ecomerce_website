@@ -111,8 +111,9 @@ export function ProductDetail({ product }: ProductDetailProps) {
           </p>
         </div>
 
-        <div className="w-1/2 flex flex-col sm:flex-row gap-4">
+        <div className="w-1/2 flex flex-row gap-4">
           <Button
+          variant={"default"}
             onClick={handleAddToCart}
             size="lg"
             className="flex-1 bg-primary hover:bg-primary/90"
