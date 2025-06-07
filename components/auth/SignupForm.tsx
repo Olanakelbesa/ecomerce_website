@@ -46,14 +46,13 @@ export function SignupForm() {
 
     setLoading(true);
 
-    // signUp should be implemented in your auth context/provider
     const result = await signUp(username.trim(), email.trim(), password);
 
     if (result.success) {
-      setSuccess("Account created! Redirecting...");
+      setSuccess("Account created successfully! Redirecting to login...");
       setTimeout(() => {
-        router.push("/dashboard");
-      }, 1000);
+        router.push("/auth/signin");
+      }, 1500);
     } else {
       setError(result.error || "Sign up failed");
     }

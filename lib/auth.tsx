@@ -60,6 +60,13 @@ const DEMO_USERS: Record<
     email: "kevinryan@gmail.com",
     name: "Kevin Ryan",
   },
+  olana: {
+    id: "4",
+    username: "olana",
+    password: "olana123",
+    email: "olana@gmail.com",
+    name: "olana kelbesa",
+  },
 };
 
 // Session storage keys
@@ -172,8 +179,58 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     isLoading,
     signIn,
     signOut,
-    signUp: async () => {
-      return { success: false, error: "Sign up is not implemented yet" };
+    signUp: async (
+      username: string,
+      email: string,
+      password: string
+    ): Promise<{ success: boolean; error?: string }> => {
+      try {
+        // Simulate API delay
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        // Check if username already exists
+        if (DEMO_USERS[username]) {
+          return {
+            success: false,
+            error: "Username already exists",
+          };
+        }
+
+        // Check if email already exists
+        const emailExists = Object.values(DEMO_USERS).some(
+          (user) => user.email === email
+        );
+        if (emailExists) {
+          return {
+            success: false,
+            error: "Email already registered",
+          };
+        }
+
+        // Create new user
+        const newUser: User = {
+          id: (Object.keys(DEMO_USERS).length + 1).toString(),
+          username,
+          email,
+          name: username,
+        };
+
+        // In a real app, you would save this to a database
+        // For demo purposes, we'll just save it to our DEMO_USERS
+        DEMO_USERS[username] = {
+          ...newUser,
+          password, // In a real app, this should be hashed
+        };
+
+        // Don't save session or set user - let them log in separately
+        return { success: true };
+      } catch (error) {
+        console.error("Sign up error:", error);
+        return {
+          success: false,
+          error: "An error occurred during sign up",
+        };
+      }
     },
   };
 
